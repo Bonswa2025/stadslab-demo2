@@ -32,6 +32,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 // ---------------------------------------------
 export const UI_BUILD_VERSION = 'v2025-11-06-stable';
 
+// --- localStorage safety helpers (SSR safe) ---
+const isBrowser = typeof window !== 'undefined';
+const storage = {
+  get(key: string) {
+    if (!isBrowser) return null;
+    try { return window.localStorage.getItem(key); } catch { return null; }
+  },
+  set(key: string, val: string) {
+    if (!isBrowser) return;
+    try { window.localStorage.setItem(key, val); } catch {}
+  },
+  remove(key: string) {
+    if (!isBrowser) return;
+    try { window.localStorage.removeItem(key); } catch {}
+  },
+};
+
 // ---------------------------------------------
 // Basis data & helpers
 // ---------------------------------------------
