@@ -527,12 +527,31 @@ setInstancesById((prev) => {
   const equalizeSplit = ()=>{
     if (!activeConceptIds.length) return;
     const total = Math.max(0, totalPeople);
-    const even = activeConceptIds.length ? Math.floor(total/activeConceptIds.length) : 0;
-    const leftover = total - even*activeConceptIds.length;
-    setInstancesById(prev=>{ const next = { ...prev }; activeConceptIds.forEach((id, idx)=>{ next[id] = { ...next[id], people: idx<leftover ? even+1 : even }; }); return next; });
+   // types bovenin bestand (als nog niet gedaan)
+type Instance = { people?: number; [key: string]: any };
+
+// ...
+const even = activeConceptIds.length
+  ? Math.floor(total / activeConceptIds.length)
+  : 0;
+const leftover = total - even * activeConceptIds.length;
+
+setInstancesById((prev) => {
+  const next: Record<string, Instance> = {
+    ...(prev as Record<string, Instance>),
   };
 
-  // Aggregatie (zoals pastel-versie)
+  activeConceptIds.forEach((id, idx) => {
+    const cur: Instance = (next[id] ?? {}) as Instance; // <-- default naar {}
+    const add = even + (idx < leftover ? 1 : 0);
+    const base = Number(cur.people ?? 0);
+
+    next[id] = { ...cur, people: base + add }; // <-- spread op object, nooit undefined
+  });
+
+  return next;
+});
+
   const detailedPerConcept = useMemo(()=>{
     return activeConceptIds.map(cid=>{
       const inst = instancesById[cid];
