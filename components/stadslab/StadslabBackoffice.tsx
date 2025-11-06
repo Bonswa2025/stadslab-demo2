@@ -305,11 +305,31 @@ function ConceptEditor({ concept, instance, onChange, colorIdx, isAdmin, updateI
   const normalizedWeights = useMemo(() => {
     const on = optionKeys.filter(k => enabledOptions[k]);
     if (!on.length) return {};
-    const w = {}; on.forEach(k => (w[k] = Number((Number(optionWeights[k]) || 0).toFixed(2))));
-    const sum = Object.values(w).reduce((a, b) => a + b, 0);
-    const diff = Number((100 - sum).toFixed(2));
-    if (Math.abs(diff) > 0.01) { const fix = on[0]; w[fix] = Number(((w[fix] || 0) + diff).toFixed(2)); }
-    return w;
+
+// w is een map van string → number
+const w: Record<string, number> = {};
+
+// vul w met nette getallen (2 decimalen)
+on.forEach((k: string) => {
+  const raw = Number(optionWeights[k] ?? 0);
+  w[k] = Number(raw.toFixed(2));
+});
+
+// zeg expliciet dat dit nummers zijn
+const values = Object.values(w) as number[];
+
+// veilig optellen
+const sum = values.reduce((a: number, b: number) => a + b, 0);
+
+// verschil afronden en eerste item corrigeren
+const diff = Number((100 - sum).toFixed(2));
+if (Math.abs(diff) > 0.01) {
+  const fix = on[0] as string;
+  w[fix] = Number(((w[fix] ?? 0) + diff).toFixed(2));
+}
+
+return w;
+
   }, [optionKeys, enabledOptions, optionWeights]);
 
   const items = useMemo(() => {
