@@ -840,20 +840,22 @@ function ConceptEditor({
 // Hoofdcomponent met Tabs + Admin
 // ---------------------------------------------
 export default function StadslabBackoffice() {
-  // Concepts (nu bewerkbaar + persist)
-  const [concepts, setConcepts] = useState(() => {
-    try {
-      const s = localStorage.getItem(LS_CONCEPTS);
-      return s ? JSON.parse(s) : defaultConcepts;
-    } catch {
-      return defaultConcepts;
-    }
-  });
-  useEffect(() => {
-    try {
-      localStorage.setItem(LS_CONCEPTS, JSON.stringify(concepts));
-    } catch {}
-  }, [concepts]);
+// Concepts (nu bewerkbaar + persist)
+const [concepts, setConcepts] = useState(defaultConcepts);
+
+// load once from localStorage on client
+useEffect(() => {
+  const s = storage.get(LS_CONCEPTS);
+  if (s) {
+    try { setConcepts(JSON.parse(s)); } catch {}
+  }
+}, []);
+
+// persist when concepts change
+useEffect(() => {
+  storage.set(LS_CONCEPTS, JSON.stringify(concepts));
+}, [concepts]);
+
 
   const [eventName, setEventName] = useState(() => {
     const s = localStorage.getItem(LS_EVENT_NAME);
