@@ -700,7 +700,7 @@ return (
         </Card>
       )}
 
-      {/* Login modal */}
+           {/* Login modal */}
       {showLogin && (
         <div
           className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
@@ -740,11 +740,7 @@ return (
           </div>
         </div>
       )}
-    </motion.div>
-  </div>
+    </motion.div>   {/* sluit de motion container */}
+  </div>           {/* sluit de buitenste pagina-div */}
 );
-}
-}
-
-
- 
+}                  /* sluit de component-functie */
