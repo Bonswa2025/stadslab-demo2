@@ -461,7 +461,7 @@ return w;
 // ---------------------------------------------
 // Hoofdcomponent met Tabs + Admin
 // ---------------------------------------------
-export default function StadslabBackoffice(): {
+export default function StadslabBackoffice() {
   // Concepts (nu bewerkbaar + persist)
   const [concepts, setConcepts] = useState(()=>{ try{ const s = localStorage.getItem(LS_CONCEPTS); return s ? JSON.parse(s) : defaultConcepts; } catch{ return defaultConcepts; } });
   useEffect(()=>{ try{ localStorage.setItem(LS_CONCEPTS, JSON.stringify(concepts)); }catch{} }, [concepts]);
