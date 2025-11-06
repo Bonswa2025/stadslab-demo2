@@ -744,6 +744,6 @@ return (
 );
 }
 }
-export default StadslabBackoffice;
+
 
  
