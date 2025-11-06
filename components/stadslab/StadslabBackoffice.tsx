@@ -868,23 +868,37 @@ useEffect(() => {
   storage.set(LS_EVENT_NAME, eventName);
 }, [eventName]);
 
-  const [instancesById, setInstancesById] = useState<Record<string, Instance>>(
-    () => {
-      const raw = localStorage.getItem(LS_EVENT_INST);
-      const parsed = raw ? (JSON.parse(raw) as Record<string, Instance>) : {};
-      const valid = new Set((concepts || []).map((c) => c.id));
-      return Object.fromEntries(Object.entries(parsed).filter(([k]) => valid.has(k)));
-    }
-  );
-  useEffect(() => {
-    localStorage.setItem(LS_EVENT_INST, JSON.stringify(instancesById));
-  }, [instancesById]);
-  useEffect(() => {
-    const valid = new Set(concepts.map((c) => c.id));
-    setInstancesById((prev) =>
-      Object.fromEntries(Object.entries(prev).filter(([k]) => valid.has(k)))
+const [instancesById, setInstancesById] = useState<Record<string, Instance>>({});
+
+// load once from localStorage
+useEffect(() => {
+  const raw = storage.get(LS_EVENT_INST);
+  if (!raw) return;
+
+  try {
+    const parsed = JSON.parse(raw) as Record<string, Instance>;
+    const valid = new Set((concepts || []).map((c) => c.id));
+    const cleaned = Object.fromEntries(
+      Object.entries(parsed).filter(([k]) => valid.has(k))
     );
-  }, [concepts]);
+    setInstancesById(cleaned);
+  } catch {}
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+// persist on change
+useEffect(() => {
+  storage.set(LS_EVENT_INST, JSON.stringify(instancesById));
+}, [instancesById]);
+
+// when concepts change, remove stale instances
+useEffect(() => {
+  const valid = new Set(concepts.map((c) => c.id));
+  setInstancesById((prev) =>
+    Object.fromEntries(Object.entries(prev).filter(([k]) => valid.has(k)))
+  );
+}, [concepts]);
+
 
   const activeConceptIds = useMemo(
     () => Object.keys(instancesById),
