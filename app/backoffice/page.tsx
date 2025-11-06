@@ -1,4 +1,7 @@
 'use client';
-import dynamic from 'next/dynamic';
-const StadslabBackoffice = dynamic(() => import('@/components/stadslab/StadslabBackoffice'), { ssr: false });
-export default function Page(){ return <StadslabBackoffice/> }
+
+import StadslabBackoffice from '@/components/stadslab/StadslabBackoffice';
+
+export default function Page() {
+  return <StadslabBackoffice />;
+}
