@@ -78,6 +78,7 @@ type Instance = {
 };
 
 
+
 // Default concepts (met optionele kleur)
 const defaultConcepts = [
   {
