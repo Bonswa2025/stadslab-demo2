@@ -1213,7 +1213,7 @@ setConcepts((prev) =>
        };
       }); 
   }, [activeConceptIds, instancesById, totalPeople, concepts]);
-}  
+
 return (
   <div
     className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 p-6 ${
