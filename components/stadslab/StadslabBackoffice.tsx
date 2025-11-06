@@ -740,7 +740,7 @@ return (
           </div>
         </div>
       )}
-    </motion.div>   {/* sluit de motion container */}
-  </div>           {/* sluit de buitenste pagina-div */}
-);
-}                  /* sluit de component-functie */
+       </motion.div>
+    </div>
+  );
+}
