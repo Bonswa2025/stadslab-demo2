@@ -1213,6 +1213,7 @@ setConcepts((prev) =>
       };
     });
   }, [activeConceptIds, instancesById, totalPeople, concepts]);
+}
 
   return (
     <div
