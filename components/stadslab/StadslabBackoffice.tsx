@@ -1202,8 +1202,10 @@ setConcepts((prev) =>
   // data voor verdeling
   const splitData = useMemo(() => {
     const total = Math.max(1, totalPeople);
+    
     return activeConceptIds.map((cid, idx) => {
       const people = Number(instancesById[cid]?.people) || 0;
+      
       return {
         cid,
         name: concepts.find((c) => c.id === cid)?.name || 'Concept',
@@ -1214,14 +1216,15 @@ setConcepts((prev) =>
       }); 
 }, [activeConceptIds, instancesById, totalPeople, concepts]);
 
-
 return (
   <div
     className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 p-6 ${
       isAdmin && showAdminPanel ? 'pr-96' : ''
     }`}
   >
-    {/* ... */}
+  </div> 
+  );
+{/* ... */}
 
       <motion.div
         initial={{ opacity: 0, y: 12 }}
