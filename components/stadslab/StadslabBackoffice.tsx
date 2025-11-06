@@ -1075,19 +1075,6 @@ useEffect(() => {
   setIsAdmin(storage.get(ADMIN_FLAG) === '1');
 }, []);
 
-const submitLogin = useCallback(() => {
-  if (password === ADMIN_PASS) {
-    setIsAdmin(true);
-    setShowAdminPanel(true);
-    storage.set(ADMIN_FLAG, '1');
-    setShowLogin(false);
-    setPassword('');
-  } else {
-    alert('Onjuist wachtwoord');
-  }
-}, [password]);
-
-
 const doLogout = useCallback(() => {
   setIsAdmin(false);
   storage.remove(ADMIN_FLAG);
