@@ -494,7 +494,37 @@ const totalPeople = useMemo(
   const setSplitByPerc = (cidTarget, pct)=>{
     const total = Math.max(1, totalPeople);
     const targetAbs = Math.round((pct/100)*total);
-    setInstancesById(prev=>{ const next = { ...prev }; if (!next[cidTarget]) return prev; const others = activeConceptIds.filter(id=>id!==cidTarget); const sumOthers = others.reduce((a,id)=>a+(Number(prev[id]?.people)||0),0); next[cidTarget] = { ...next[cidTarget], people: targetAbs }; let remaining = total - targetAbs; if (!others.length) return next; if (sumOthers<=0){ const even = Math.max(0, Math.floor(remaining/others.length)); others.forEach((id, idx)=>{ next[id] = { ...next[id], people: idx===others.length-1 ? Math.max(0, remaining - even*(others.length-1)) : even }; }); } else { let assigned=0; others.forEach((id, idx)=>{ if (idx===others.length-1) next[id] = { ...next[id], people: Math.max(0, remaining - assigned) }; else { const share = (Number(prev[id]?.people)||0) / sumOthers; const val = Math.max(0, Math.round(remaining*share)); assigned+=val; next[id] = { ...next[id], people: val }; } }); } return next; });
+  const total = Math.max(1, totalPeople);
+const targetAbs = Math.round((pct / 100) * total);
+
+setInstancesById((prev) => {
+  const next: Record<string, Instance> = { ...(prev as Record<string, Instance>) };
+
+  const target = next[cidTarget];
+  if (!target) return prev;
+
+  // zet doel
+  next[cidTarget] = { ...target, people: Number(targetAbs) };
+
+  // overige ids verdelen
+  const others = activeConceptIds.filter((id) => id !== cidTarget);
+  const rest = Math.max(0, total - targetAbs);
+
+  if (others.length) {
+    const per = Math.floor(rest / others.length);
+    let remainder = rest - per * others.length;
+
+    for (const id of others) {
+      const base = Number(next[id]?.people ?? 0);
+      const add = per + (remainder > 0 ? 1 : 0);
+      if (remainder > 0) remainder--;
+      next[id] = { ...(next[id] || {}), people: base + add };
+    }
+  }
+
+  return next;
+});
+
   };
   const equalizeSplit = ()=>{
     if (!activeConceptIds.length) return;
