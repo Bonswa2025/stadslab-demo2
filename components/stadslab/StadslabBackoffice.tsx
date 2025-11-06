@@ -842,23 +842,47 @@ setInstancesById((prev) => {
       )}
 
       {/* Login modal */}
+           {/* Login modal */}
       {showLogin && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={()=>setShowLogin(false)}>
-          <div className="bg-white rounded-xl shadow-xl p-6 w-80" onClick={(e)=>e.stopPropagation()}>
+        <div
+          className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+          onClick={() => setShowLogin(false)}
+        >
+          <div
+            className="bg-white rounded-xl shadow-xl p-6 w-80"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">Admin login</h2>
-              <button className="text-slate-500" onClick={()=>setShowLogin(false)} aria-label="Sluiten">×</button>
+              <button
+                className="text-slate-500"
+                onClick={() => setShowLogin(false)}
+                aria-label="Sluiten"
+              >
+                ×
+              </button>
             </div>
-            <Input type="password" placeholder="Wachtwoord" value={password} onChange={(e)=>setPassword(e.target.value)} onKeyDown={(e)=> e.key==='Enter' && submitLogin()} />
+            <Input
+              type="password"
+              placeholder="Wachtwoord"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && submitLogin()}
+            />
             <div className="mt-4 flex justify-end gap-2">
-              <Button variant="outline" onClick={()=>setShowLogin(false)}>Annuleren</Button>
-              <Button onClick={submitLogin} className="bg-emerald-600 text-white">Inloggen</Button>
+              <Button variant="outline" onClick={() => setShowLogin(false)}>
+                Annuleren
+              </Button>
+              <Button onClick={submitLogin} className="bg-emerald-600 text-white">
+                Inloggen
+              </Button>
             </div>
           </div>
         </div>
-    ))
-  </div>
-  );
-} // sluit de function definitie af
-export default StadslabBackoffice;
+      )} {/* <-- sluit de conditional: )} */}
 
+    </motion.div>   {/* <-- sluit motion.div */}
+  </div>           {/* <-- sluit outer div */}
+);
+}                 {/* <-- sluit component-functie */}
+export default StadslabBackoffice;
