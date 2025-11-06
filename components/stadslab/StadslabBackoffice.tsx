@@ -857,13 +857,16 @@ useEffect(() => {
 }, [concepts]);
 
 
-  const [eventName, setEventName] = useState(() => {
-    const s = localStorage.getItem(LS_EVENT_NAME);
-    return s || 'Nieuw evenement';
-  });
-  useEffect(() => {
-    localStorage.setItem(LS_EVENT_NAME, eventName);
-  }, [eventName]);
+ const [eventName, setEventName] = useState('Nieuw evenement');
+
+useEffect(() => {
+  const s = storage.get(LS_EVENT_NAME);
+  if (s) setEventName(s);
+}, []);
+
+useEffect(() => {
+  storage.set(LS_EVENT_NAME, eventName);
+}, [eventName]);
 
   const [instancesById, setInstancesById] = useState<Record<string, Instance>>(
     () => {
