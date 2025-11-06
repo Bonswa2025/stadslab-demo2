@@ -1212,7 +1212,8 @@ setConcepts((prev) =>
         color: colors[idx % colors.length],
        };
       }); 
-  }, [activeConceptIds, instancesById, totalPeople, concepts]);
+}, [activeConceptIds, instancesById, totalPeople, concepts]);
+
 
 return (
   <div
