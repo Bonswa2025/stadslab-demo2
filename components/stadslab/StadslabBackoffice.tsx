@@ -1,4 +1,4 @@
-// Stadslab Backoffice – Pastel UI + Tabs + Admin (login + rechter paneel)
+    // Stadslab Backoffice – Pastel UI + Tabs + Admin (login + rechter paneel)
 // Build: v2025-10-27-admin1
 // - Gebaseerd op "stadslab_backoffice_pastel_ui_update (2).jsx" + admin-CRUD uit
 //   "smart_order_app_admin_crud_producten_toevoegen_verwijderen.jsx".
@@ -494,9 +494,7 @@ const totalPeople = useMemo(
   const setSplitByPerc = (cidTarget, pct)=>{
     const total = Math.max(1, totalPeople);
     const targetAbs = Math.round((pct/100)*total);
-  const total = Math.max(1, totalPeople);
-const targetAbs = Math.round((pct / 100) * total);
-
+ 
 setInstancesById((prev) => {
   const next: Record<string, Instance> = { ...(prev as Record<string, Instance>) };
 
