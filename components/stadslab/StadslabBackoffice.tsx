@@ -1075,11 +1075,6 @@ useEffect(() => {
   setIsAdmin(storage.get(ADMIN_FLAG) === '1');
 }, []);
 
-const doLogout = useCallback(() => {
-  setIsAdmin(false);
-  storage.remove(ADMIN_FLAG);
-}, []);
-
   const [showLogin, setShowLogin] = useState(false);
   const [password, setPassword] = useState('');
   const [showAdminPanel, setShowAdminPanel] = useState(true);
