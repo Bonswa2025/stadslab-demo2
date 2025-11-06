@@ -8,6 +8,10 @@
 // - Stabiele concept-IDs behouden; bij verwijderen van een concept wordt ook de instance verwijderd.
 'use client';
 
+export default function StadslabBackoffice() {
+  return <div>Backoffice OK</div>;
+}
+
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
