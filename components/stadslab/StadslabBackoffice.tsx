@@ -740,7 +740,26 @@ return (
           </div>
         </div>
       )}
-       </motion.div>
-    </div>
-  );
+
+      {isAdmin && showAdminPanel && (
+        <Card className="fixed top-0 right-0 h-screen w-96 rounded-none border-l shadow-xl bg-white z-40">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div className="font-semibold">Admin-paneel</div>
+            <Button
+              variant="ghost"
+              onClick={() => setShowAdminPanel(false)}
+              title="Paneel sluiten"
+              className="text-slate-500 px-2"
+            >
+              ×
+            </Button>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            {/* … je secties … */}
+          </CardContent>
+        </Card>
+      )}
+    </motion.div>
+  </div>
+);
 }
