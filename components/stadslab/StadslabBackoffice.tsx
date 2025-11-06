@@ -1210,11 +1210,8 @@ setConcepts((prev) =>
         people,
         pct: Math.round((people / total) * 100),
         color: colors[idx % colors.length],
-      };
-    });
+         });
   }, [activeConceptIds, instancesById, totalPeople, concepts]);
-}
-
   return (
   <div
     className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 p-6 ${
