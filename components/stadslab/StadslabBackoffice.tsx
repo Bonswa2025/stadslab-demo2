@@ -53,7 +53,13 @@ const LS_EVENT_NAME = 'stadslab_event_name';
 const ADMIN_FLAG = 'stadslab_admin';
 const ADMIN_PASS = 'stadslab'; // wijzig indien nodig
 
-type Instance = { people?: number; enabledOptions?: Record<string, boolean>; optionWeights?: Record<string, number> };
+type Instance = {
+  conceptId?: string;
+  people?: number;
+  enabledOptions?: Record<string, boolean>;
+  optionWeights?: Record<string, number>;
+};
+
 
 // Default concepts (met optionele kleur)
 const defaultConcepts = [
