@@ -437,7 +437,7 @@ return w;
                     <td className="text-right px-3 py-2 text-slate-700">{item.unit}</td>
                     <td className="text-right px-3 py-2 text-slate-700">
                       {isAdmin ? (
-                        <InlineNumber value={Number(item.basePer100 ?? 0)} onChange={(val)=>updateItemBase(concept.id, item.__source || 'basis', item.id, val)} />
+                        <InlineNumber value={Number(item.basePer100 ?? 0)} onChange={(val)=>updateItemBase(concept.id, item.__source || 'basis', item.id, val)}  disabled={false} />
                       ) : (
                         <>{(item.__adjBasePer100 ?? item.basePer100).toFixed ? (item.__adjBasePer100 ?? item.basePer100).toFixed(2) : (item.__adjBasePer100 ?? item.basePer100)}</>
                       )}
