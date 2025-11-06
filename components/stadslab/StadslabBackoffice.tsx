@@ -1210,7 +1210,8 @@ setConcepts((prev) =>
         people,
         pct: Math.round((people / total) * 100),
         color: colors[idx % colors.length],
-         );
+       };
+      }); 
   }, [activeConceptIds, instancesById, totalPeople, concepts]);
   return (
   <div
