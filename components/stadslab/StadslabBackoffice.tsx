@@ -1120,15 +1120,28 @@ useEffect(() => {
       })
     );
   };
-  const removeItem = (conceptId: string, catKey: string, itemId: string) => {
-    setConcepts((prev) =>
-      prev.map((c) => {
-        if (c.id !== conceptId) return c;
-        const cats = { ...c.categories };
-        cats[catKey] = (cats[catKey] || []).filter((i: any) => i.id !== itemId);
-        return { ...c, categories: cats };
-      })
-    );
+setConcepts((prev) =>
+  prev.map((c) => {
+    if (c.id !== conceptId) return c;
+
+    // veilige kopie van categories (kan undefined zijn)
+    const cats: Record<string, typeof c.categories extends Record<string, any[]> ? any[] : any> = {
+      ...(c.categories ?? {}),
+    };
+
+    // pak de bestaande lijst of een lege
+    const list = [...(cats[catKey] ?? [])];
+
+    // filter het item eruit
+    const nextList = list.filter((it: any) => it.id !== itemId);
+
+    // schrijf terug
+    cats[catKey] = nextList;
+
+    return { ...c, categories: cats };
+  })
+);
+
   };
   const updateItemBase = (
     conceptId: string,
