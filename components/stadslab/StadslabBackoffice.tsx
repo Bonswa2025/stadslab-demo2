@@ -1222,9 +1222,14 @@ return (
       isAdmin && showAdminPanel ? 'pr-96' : ''
     }`}
   >
-  </div> 
-  );
-{/* ... */}
+    {/* Plaats hier je content. 
+        Als je nog <motion.div> blokken had staan en je wilt FRAMER nu even overslaan,
+        laat ze dan weg of vervang tijdelijk door <div> … </div>. */}
+  </div>
+);
+} // <-- sluit de component-functie
+export default StadslabBackoffice;
+
 
       <motion.div
         initial={{ opacity: 0, y: 12 }}
