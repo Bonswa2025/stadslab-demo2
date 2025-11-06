@@ -1216,11 +1216,13 @@ setConcepts((prev) =>
 }
 
   return (
-    <div
-      className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 p-6 ${
-        isAdmin && showAdminPanel ? 'pr-96' : ''
-      }`}
-    >
+  <div
+    className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 p-6 ${
+      isAdmin && showAdminPanel ? 'pr-96' : ''
+    }`}
+  >
+    {/* ... */}
+
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
