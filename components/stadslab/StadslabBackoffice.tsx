@@ -743,7 +743,7 @@ return (
   </div>
 );
 }
-
+}
 export default StadslabBackoffice;
 
  
