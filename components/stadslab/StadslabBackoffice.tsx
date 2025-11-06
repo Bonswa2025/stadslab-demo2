@@ -1068,14 +1068,29 @@ useEffect(() => {
     return rows;
   }, [detailedPerConcept]);
 
-  // ------------------- Admin: state + handlers -------------------
-  const [isAdmin, setIsAdmin] = useState(() => {
-    try {
-      return localStorage.getItem(ADMIN_FLAG) === '1';
-    } catch {
-      return false;
-    }
-  });
+const [isAdmin, setIsAdmin] = useState(false);
+
+useEffect(() => {
+  setIsAdmin(storage.get(ADMIN_FLAG) === '1');
+}, []);
+
+const submitLogin = useCallback(() => {
+  if (password === ADMIN_PASS) {
+    setIsAdmin(true);
+    setShowAdminPanel(true);
+    storage.set(ADMIN_FLAG, '1');
+    setShowLogin(false);
+    setPassword('');
+  } else {
+    alert('Onjuist wachtwoord');
+  }
+}, [password]);
+
+const doLogout = useCallback(() => {
+  setIsAdmin(false);
+  storage.remove(ADMIN_FLAG);
+}, []);
+
   const [showLogin, setShowLogin] = useState(false);
   const [password, setPassword] = useState('');
   const [showAdminPanel, setShowAdminPanel] = useState(true);
