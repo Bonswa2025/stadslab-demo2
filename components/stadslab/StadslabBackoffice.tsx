@@ -480,7 +480,16 @@ export default function StadslabBackofficeIntegratedAdmin(){
   };
   const updateInstance = (conceptId, patch)=> setInstancesById(prev=>({ ...prev, [conceptId]: patch }));
 
-  const totalPeople = useMemo(()=> activeConceptIds.reduce((a,cid)=>a+(Number(instancesById[cid]?.people)||0),0), [activeConceptIds, instancesById]);
+  type Instance = { people?: number };
+const totalPeople = useMemo(
+  () =>
+    activeConceptIds.reduce((a, cid) => {
+      const m = (instancesById as Record<string, Instance>)[cid];
+      return a + Number(m?.people ?? 0);
+    }, 0),
+  [activeConceptIds, instancesById]
+);
+
 
   const setSplitByPerc = (cidTarget, pct)=>{
     const total = Math.max(1, totalPeople);
