@@ -855,7 +855,9 @@ setInstancesById((prev) => {
             </div>
           </div>
         </div>
-      )}
-    </div>
+    ))
+  </div>
   );
-}
+} // sluit de function definitie af
+export default StadslabBackoffice;
+
