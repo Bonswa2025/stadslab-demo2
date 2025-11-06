@@ -624,7 +624,8 @@ setInstancesById((prev) => {
   }, [activeConceptIds, instancesById, totalPeople, concepts]);
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 p-6 ${isAdmin && showAdminPanel ? 'pr-96' : ''}`}>
+    <div 
+        className={`min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 p-6 ${isAdmin && showAdminPanel ? 'pr-96' : ''}`}>
       <motion.div initial={{opacity:0, y:12}} animate={{opacity:1, y:0}} transition={{duration:0.35}}
         className="mx-auto max-w-6xl bg-white/90 backdrop-blur rounded-2xl shadow-xl p-6 border border-slate-200">
 
