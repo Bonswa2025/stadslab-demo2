@@ -6,6 +6,7 @@
 //   product CRUD, inline aanpassen van "Basis (per 100)" wanneer admin.
 // - Data-persist via localStorage (concepts + event state).
 // - Stabiele concept-IDs behouden; bij verwijderen van een concept wordt ook de instance verwijderd.
+'use client';
 
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
